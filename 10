@@ -1,0 +1,67 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+
+class Student {
+
+    int rollNo;
+    String name;
+    String department;
+
+    Student(int rollNo, String name, String department) {
+        this.rollNo = rollNo;
+        this.name = name;
+        this.department = department;
+    }
+
+    void display() {
+        System.out.println("Roll No    : " + rollNo);
+        System.out.println("Name       : " + name);
+        System.out.println("Department : " + department);
+    }
+}
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        // ArrayList to store student objects
+        ArrayList<Student> studentList = new ArrayList<>();
+
+        studentList.add(new Student(101, "Rahul", "CSE"));
+        studentList.add(new Student(102, "Sneha", "ECE"));
+        studentList.add(new Student(103, "Kiran", "Mechanical"));
+
+        System.out.println("===== Student Records using ArrayList =====");
+
+        for (Student s : studentList) {
+            s.display();
+            System.out.println();
+        }
+
+        // HashMap to store Roll Number and Name
+        HashMap<Integer, String> studentMap = new HashMap<>();
+
+        studentMap.put(101, "Rahul");
+        studentMap.put(102, "Sneha");
+        studentMap.put(103, "Kiran");
+
+        System.out.println("===== Student Records using HashMap =====");
+
+        for (Integer roll : studentMap.keySet()) {
+            System.out.println("Roll No : " + roll +
+                    "   Name : " + studentMap.get(roll));
+        }
+
+        // Searching a student
+        int searchRoll = 102;
+
+        System.out.println("\nSearching Roll Number : " + searchRoll);
+
+        if (studentMap.containsKey(searchRoll)) {
+            System.out.println("Student Found");
+            System.out.println("Name : " + studentMap.get(searchRoll));
+        } else {
+            System.out.println("Student Not Found");
+        }
+    }
+}
