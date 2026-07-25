@@ -1,0 +1,108 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class Main extends JFrame implements ActionListener {
+
+    JTextField usnField, nameField;
+    JComboBox<String> branchBox;
+    JRadioButton male, female;
+    ButtonGroup group;
+    JCheckBox javaBox, pythonBox;
+    JButton submit, clear;
+    JTextArea output;
+
+    Main() {
+
+        setTitle("Student Registration Form");
+        setLayout(new FlowLayout());
+
+        add(new JLabel("USN:"));
+        usnField = new JTextField(12);
+        add(usnField);
+
+        add(new JLabel("Name:"));
+        nameField = new JTextField(12);
+        add(nameField);
+
+        add(new JLabel("Branch:"));
+        branchBox = new JComboBox<>(
+                new String[]{"Computer Science", "ECE", "Mechanical"});
+        add(branchBox);
+
+        male = new JRadioButton("Male");
+        female = new JRadioButton("Female");
+
+        group = new ButtonGroup();
+        group.add(male);
+        group.add(female);
+
+        add(male);
+        add(female);
+
+        javaBox = new JCheckBox("Java");
+        pythonBox = new JCheckBox("Python");
+
+        add(javaBox);
+        add(pythonBox);
+
+        submit = new JButton("Submit");
+        clear = new JButton("Clear");
+
+        add(submit);
+        add(clear);
+
+        submit.addActionListener(this);
+        clear.addActionListener(this);
+
+        output = new JTextArea(6, 30);
+        output.setEditable(false);
+
+        add(new JScrollPane(output));
+
+        setSize(400, 400);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+
+        if (e.getSource() == submit) {
+
+            if (usnField.getText().isEmpty() ||
+                nameField.getText().isEmpty()) {
+
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Mandatory fields empty!"
+                );
+                return;
+            }
+
+            output.setText(
+                    "USN: " + usnField.getText() +
+                    "\nName: " + nameField.getText() +
+                    "\nBranch: " + branchBox.getSelectedItem() +
+                    "\nGender: " +
+                    (male.isSelected() ? "Male"
+                            : female.isSelected() ? "Female" : "-") +
+                    "\nSkills: " +
+                    (javaBox.isSelected() ? "Java " : "") +
+                    (pythonBox.isSelected() ? "Python" : "")
+            );
+
+        } else {
+
+            usnField.setText("");
+            nameField.setText("");
+            group.clearSelection();
+            javaBox.setSelected(false);
+            pythonBox.setSelected(false);
+            output.setText("");
+        }
+    }
+
+    public static void main(String[] args) {
+        new Main();
+    }
+}
