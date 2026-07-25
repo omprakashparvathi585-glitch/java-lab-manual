@@ -1,0 +1,103 @@
+abstract class ChessPiece {
+
+    protected String color;
+
+    public ChessPiece(String color) {
+        this.color = color;
+    }
+
+    public abstract void move();
+}
+
+class King extends ChessPiece {
+
+    public King(String color) {
+        super(color);
+    }
+
+    @Override
+    public void move() {
+        System.out.println(color + " King moves one square in any direction.");
+    }
+}
+
+class Queen extends ChessPiece {
+
+    public Queen(String color) {
+        super(color);
+    }
+
+    @Override
+    public void move() {
+        System.out.println(color + " Queen moves any number of squares in any direction.");
+    }
+}
+
+class Bishop extends ChessPiece {
+
+    public Bishop(String color) {
+        super(color);
+    }
+
+    @Override
+    public void move() {
+        System.out.println(color + " Bishop moves diagonally.");
+    }
+}
+
+class Knight extends ChessPiece {
+
+    public Knight(String color) {
+        super(color);
+    }
+
+    @Override
+    public void move() {
+        System.out.println(color + " Knight moves in an L-shape.");
+    }
+}
+
+class Rook extends ChessPiece {
+
+    public Rook(String color) {
+        super(color);
+    }
+
+    @Override
+    public void move() {
+        System.out.println(color + " Rook moves horizontally or vertically.");
+    }
+}
+
+class Pawn extends ChessPiece {
+
+    public Pawn(String color) {
+        super(color);
+    }
+
+    @Override
+    public void move() {
+        System.out.println(color + " Pawn moves one square forward.");
+    }
+}
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        ChessPiece[] pieces = {
+                new King("White"),
+                new Queen("Black"),
+                new Bishop("White"),
+                new Knight("Black"),
+                new Rook("White"),
+                new Pawn("Black")
+        };
+
+        System.out.println("===== Chess Piece Movements =====\n");
+
+        for (ChessPiece piece : pieces) {
+            piece.move();
+        }
+    }
+}
