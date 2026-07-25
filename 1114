@@ -1,0 +1,28 @@
+include <semaphore.h>
+
+class Foo {
+public:
+    Foo() {
+        sem_init(&sem1, 0, 0);
+        sem_init(&sem2, 0, 0);
+    }
+
+    void first(function<void()> printFirst) {
+        printFirst();
+        sem_post(&sem1);  // signal that first() is done
+    }
+
+    void second(function<void()> printSecond) {
+        sem_wait(&sem1);  // wait until first() finishes
+        printSecond();
+        sem_post(&sem2);  // signal that second() is done
+    }
+
+    void third(function<void()> printThird) {
+        sem_wait(&sem2);  // wait until second() finishes
+        printThird();
+    }
+
+private:
+    sem_t sem1, sem2;
+};
